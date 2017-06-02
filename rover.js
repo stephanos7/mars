@@ -4,7 +4,8 @@ var myRover = {
   direction : "N"
 };
 
-
+//planet grid
+var marsGrid = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]];
 
 //command to move forward
 var f = function(rover){
@@ -56,6 +57,11 @@ var r = function(rover){
 
 };
 
+
+//obstacles' positions following recent meteor showers
+var collisionCoordinates = [[9,6],[6,9],[0,4]];
+
+
 //prompting the user for instructions
 var ins = prompt();
 
@@ -86,6 +92,17 @@ for (i = 0; i < ins.length; i++){
     if(myRover.position[0] > 10){
       myRover.position[0] = 0;
     }
+
+  //checking for obstacles on the surface...
+
+  for(var a = 0; a < collisionCoordinates.length; a++){
+    obstacle = collisionCoordinates[a];
+    if(obstacle[0] === myRover.position[0] && obstacle[1] === myRover.position[1]){
+      console.log("Danger we've hit a meteor!!!!!!");
+      break;
+    }
+  }
+
 
 //breaking and surfacing error to user whilst logging rover's last position
   if(ins[i] !== "f" && ins[i] !== "b" && ins[i] !== "l" && ins[i] !== "r" ){
